@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.pm_practica_1_tron.R
@@ -58,10 +59,11 @@ class CalculaTron : AppCompatActivity() {
             }
         }.start()
 
-        cuentaSiguiente = generarCuenta(true)
+        cuentaSiguiente = generarCuenta()
         resultadoSiguiente = resultadoCuenta()
         bind.cuentaSiguiente.text = cuentaSiguiente
-        cuentaActual = generarCuenta(false)
+        cuentaActual = generarCuenta()
+        resultado = resultadoCuenta()
         bind.cuentaActual.text = cuentaActual
 
         for (i in 0..9) {
@@ -92,7 +94,7 @@ class CalculaTron : AppCompatActivity() {
         }
 
         bind.enviar.setOnClickListener {
-            if (resultadoCuenta() == bind.input.text.toString().toInt()){
+            if (resultado == bind.input.text.toString().toInt()){
                 sumarAciertos()
                 estadoIconoAciertos(true)
             }else {
@@ -104,18 +106,11 @@ class CalculaTron : AppCompatActivity() {
         }
     }
 
-    fun generarCuenta(esSiguiente:Boolean):String{
-        if(esSiguiente){
+    fun generarCuenta():String{
             num1 = (min..max).random()
             operador = operadores.random()
             num2 = (min..max).random()
 
-        }else{
-            num1Siguiente = (min .. max).random()
-            operador = operadores.random()
-            num2Siguiente = (min .. max).random()
-        }
-        resultadoCuenta()
 
         var cuenta = num1.toString() + operador + num2.toString()
 
@@ -142,7 +137,6 @@ class CalculaTron : AppCompatActivity() {
     }
 
     fun pasarTurno(){
-        var aux = ""
         cuentaPasada = bind.cuentaActual.text.toString()
         bind.cuentaAnterior.text = cuentaPasada
 
@@ -150,7 +144,7 @@ class CalculaTron : AppCompatActivity() {
         bind.cuentaActual.text = cuentaSiguiente
         resultado = resultadoCuenta()
 
-        bind.cuentaSiguiente.text = generarCuenta(true)
+        bind.cuentaSiguiente.text = generarCuenta()
         cuentaSiguiente = bind.cuentaSiguiente.text.toString()
 
         bind.input.text = ""
@@ -169,6 +163,11 @@ class CalculaTron : AppCompatActivity() {
     fun estadoIconoAciertos(haAcertado:Boolean){
         if (haAcertado) {
             bind.iconoAcierto.setImageResource(R.drawable.baseline_check_24)
-        }else bind.iconoAcierto.setImageResource(R.drawable.baseline_clear_24)
+            bind.cuentaAnterior.setTextColor(ContextCompat.getColor(this, R.color.verdecito))
+        }else {
+            bind.iconoAcierto.setImageResource(R.drawable.baseline_clear_24)
+            bind.cuentaAnterior.setTextColor(ContextCompat.getColor(this, com.google.android.material.R.color.design_default_color_error))
+
+        }
         }
 }
