@@ -35,6 +35,8 @@ class CalculaTron : AppCompatActivity() {
 
     private var num1: Int = 0
     private var num2: Int = 0
+    private var num1Siguiente : Int = 0
+    private var num2Siguiente : Int = 0
     private var operador : String = ""
     private var operadores = listOf("+", "-", "*")
 
@@ -123,9 +125,9 @@ class CalculaTron : AppCompatActivity() {
         num1 = (min..max).random()
 
         if (operador == "-") {
-            num2 = (min..num1).random() // Asegura que num2 <= num1
+            num2Siguiente = (min..num1).random() // Asegura que num2 <= num1
         } else {
-            num2 = (min..max).random()
+            num2Siguiente = (min..max).random()
         }
 
         val cuenta = "$num1$operador$num2"
@@ -155,13 +157,11 @@ class CalculaTron : AppCompatActivity() {
         cuentaPasada = bind.cuentaActual.text.toString()
         bind.cuentaAnterior.text = cuentaPasada
 
-        bind.cuentaSiguiente.text = generarCuenta()
-        cuentaSiguiente = bind.cuentaSiguiente.text.toString()
-
         cuentaActual = bind.cuentaSiguiente.text.toString()
         bind.cuentaActual.text = cuentaSiguiente
 
-
+        bind.cuentaSiguiente.text = generarCuenta()
+        cuentaSiguiente = bind.cuentaSiguiente.text.toString()
 
         bind.input.text = ""
     }
