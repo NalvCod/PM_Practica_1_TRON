@@ -43,11 +43,11 @@ class CalculaTron : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityCalculaTronBinding.inflate(layoutInflater)
-        fin = Intent(this, calcula_tron_historico::class.java)
+        fin = Intent(this, MenuPrincipal::class.java)
         setContentView(bind.root)
 
         var segundos = bind.contador.text.toString().toLong() // Definir segundos fuera del CountDownTimer
-        object : CountDownTimer(segundos * 10000, 1000) { // Convertir a milisegundos
+        object : CountDownTimer(segundos * 1000, 1000) { // Convertir a milisegundos
             override fun onTick(millisUntilFinished: Long) {
                 bind.contador.text = (millisUntilFinished / 1000).toString() // Actualizar el contador
             }
@@ -98,6 +98,11 @@ class CalculaTron : AppCompatActivity() {
             startActivity(intent)
         }
 
+        bind.iconoOpciones.setOnClickListener {
+            val intent = Intent(this, calcula_tron_ajustes::class.java)
+            startActivity(intent)
+        }
+
         bind.borrarTodo.setOnClickListener {
             bind.input.setText("")
         }
@@ -127,7 +132,7 @@ class CalculaTron : AppCompatActivity() {
         if (operador == "-") {
             num2Siguiente = (min..num1).random() // Asegura que num2 <= num1
         } else {
-            num2Siguiente = (min..max).random()
+            num2 = (min..max).random()
         }
 
         val cuenta = "$num1$operador$num2"
