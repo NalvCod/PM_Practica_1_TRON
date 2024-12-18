@@ -1,6 +1,7 @@
 package com.example.pm_practica_1_tron
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
@@ -16,14 +17,15 @@ import com.example.pm_practica_1_tron.databinding.ActivityCalculaTronBinding
 class CalculaTron : AppCompatActivity() {
     private lateinit var bind: ActivityCalculaTronBinding
     private lateinit var fin : Intent
+    private lateinit var shared : SharedPreferences
 
     private var min: Int = 0
     private var max: Int = 10
 
-    //Para cuando pueda limitar lo que puede salir
     private var suma: Boolean = true
     private var resta: Boolean = true
     private var multiplicacion: Boolean = true
+    private var animacion : Boolean = true
 
     private var cuentaPasada: String = ""
     private var cuentaActual: String = ""
@@ -33,12 +35,8 @@ class CalculaTron : AppCompatActivity() {
 
     private var num1: Int = 0
     private var num2: Int = 0
-    private var num1Siguiente : Int = 0
-    private var num2Siguiente : Int = 0
     private var operador : String = ""
     private var operadores = listOf("+", "-", "*")
-    private var resultado : Int = 0
-    private var resultadoSiguiente : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,11 +57,19 @@ class CalculaTron : AppCompatActivity() {
             }
         }.start()
 
+        shared = getSharedPreferences("ajustes", MODE_PRIVATE)
+
+        max = shared.getInt("maximo", 10)
+        min = shared.getInt("minimo", 0)
+        segundos = shared.getInt("cuentaatras", 20.toInt()).toLong()
+        suma = shared.getBoolean("suma", true)
+        resta = shared.getBoolean("resta", true)
+        multiplicacion = shared.getBoolean("multiplicacion", false)
+        animacion = shared.getBoolean("animacion", false)
+
         cuentaSiguiente = generarCuenta()
-        resultadoSiguiente = resultadoCuenta()
         bind.cuentaSiguiente.text = cuentaSiguiente
         cuentaActual = generarCuenta()
-        resultado = resultadoCuenta()
         bind.cuentaActual.text = cuentaActual
 
         for (i in 0..9) {
@@ -85,6 +91,11 @@ class CalculaTron : AppCompatActivity() {
             }
         }
 
+        bind.iconoSup.setOnClickListener{
+            val intent = Intent(this, MenuPrincipal::class.java)
+            startActivity(intent)
+        }
+
         bind.borrarTodo.setOnClickListener {
             bind.input.setText("")
         }
@@ -94,7 +105,8 @@ class CalculaTron : AppCompatActivity() {
         }
 
         bind.enviar.setOnClickListener {
-            if (resultado == bind.input.text.toString().toInt()){
+            var inputUser = bind.input.text.toString().toInt()
+            if ((resultadoCuenta()) == inputUser){
                 sumarAciertos()
                 estadoIconoAciertos(true)
             }else {
@@ -106,14 +118,17 @@ class CalculaTron : AppCompatActivity() {
         }
     }
 
-    fun generarCuenta():String{
-            num1 = (min..max).random()
-            operador = operadores.random()
+    fun generarCuenta(): String {
+        operador = operadores.random()
+        num1 = (min..max).random()
+
+        if (operador == "-") {
+            num2 = (min..num1).random() // Asegura que num2 <= num1
+        } else {
             num2 = (min..max).random()
+        }
 
-
-        var cuenta = num1.toString() + operador + num2.toString()
-
+        val cuenta = "$num1$operador$num2"
         return cuenta
     }
 
@@ -140,12 +155,13 @@ class CalculaTron : AppCompatActivity() {
         cuentaPasada = bind.cuentaActual.text.toString()
         bind.cuentaAnterior.text = cuentaPasada
 
-        cuentaActual = bind.cuentaSiguiente.text.toString()
-        bind.cuentaActual.text = cuentaSiguiente
-        resultado = resultadoCuenta()
-
         bind.cuentaSiguiente.text = generarCuenta()
         cuentaSiguiente = bind.cuentaSiguiente.text.toString()
+
+        cuentaActual = bind.cuentaSiguiente.text.toString()
+        bind.cuentaActual.text = cuentaSiguiente
+
+
 
         bind.input.text = ""
     }

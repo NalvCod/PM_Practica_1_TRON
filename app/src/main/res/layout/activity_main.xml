@@ -13,10 +13,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/design_default_color_secondary_variant">
+        android:background="@color/naranjita">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/iconoVolver"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="20dp"
@@ -26,17 +26,28 @@
             android:src="@drawable/baseline_arrow_back_ios_new_24" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="MemoryTron"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toEndOf="@id/imageView5"
-            app:layout_constraintTop_toTopOf="@id/imageView5"
+            android:textColor="@color/white"
             android:textSize="30dp"
-            android:textColor="@color/white"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="@+id/iconoVolver"
+            app:layout_constraintStart_toEndOf="@id/iconoVolver"
+            app:layout_constraintTop_toTopOf="@id/iconoVolver" />
 
+        <ImageView
+            android:id="@+id/iniciar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_autorenew_24"
+            android:text="Randomizar"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,34 +56,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barraSuperior"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/fondonueo">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mesa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_margin="30dp">
 
             <TextView
                 android:id="@+id/vidas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vidas: 3"
-                android:textSize="20dp"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
             </TextView>
-
-            <Button
-                android:id="@+id/iniciar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Randomizar"
-                app:layout_constraintBaseline_toTopOf="@id/f1"
-                app:layout_constraintBottom_toTopOf="@+id/f1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/f1"
@@ -81,9 +84,8 @@
                 android:gravity="center"
                 app:layout_constraintBottom_toTopOf="@+id/f2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iniciar"
+                app:layout_constraintTop_toBottomOf="@+id/vidas"
                 app:layout_constraintVertical_weight="1">
 
                 <ImageView
@@ -93,7 +95,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f1c2"
@@ -102,7 +104,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f1c3"
@@ -111,7 +113,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
             </LinearLayout>
 
@@ -132,7 +134,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f2c2"
@@ -141,7 +143,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f2c3"
@@ -150,7 +152,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
             </LinearLayout>
 
@@ -171,7 +173,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f3c2"
@@ -180,7 +182,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f3c3"
@@ -189,7 +191,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
             </LinearLayout>
 
@@ -211,7 +213,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f4c2"
@@ -220,7 +222,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
                 <ImageView
                     android:id="@+id/f4c3"
@@ -229,7 +231,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/detras" />
+                    android:src="@drawable/cartatrasera" />
 
             </LinearLayout>
 

@@ -73,71 +73,72 @@
                     android:layout_margin="20dp">
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/layoutCuenta"
+                    <android.widget.EditText
+                        android:id="@+id/min"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:hint="Contador"
-                        app:layout_constraintEnd_toStartOf="@+id/valorMaxLayout"
+                        android:hint="Valor mínimo"
+                        android:inputType="number"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"/>
 
-                        <EditText
-                            android:id="@+id/duracion"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:inputType="number">
-
-                        </EditText>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/valorMaxLayout"
+                    <android.widget.EditText
+                        android:id="@+id/max"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/layoutCuenta"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <EditText
-                            android:id="@+id/valorMax"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="Maximo"
-                            android:inputType="number"
-                            app:errorEnabled="true">
-                        </EditText>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <Spinner
-                        android:id="@+id/bloque1"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_margin="20dp"
+                        android:hint="Valor máximo"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/layoutCuenta">
+                        app:layout_constraintTop_toBottomOf="@id/min"
+                        android:layout_marginTop="16dp"/>
 
-                    </Spinner>
-
-                    <Spinner
-                        android:id="@+id/bloque2"
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_margin="20dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <android.widget.EditText
+                        android:id="@+id/cuentaAtras"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Temporizador"
+                        android:inputType="number"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/bloque1">
-                    </Spinner>
+                        app:layout_constraintTop_toBottomOf="@id/max"
+                        android:layout_marginTop="16dp"/>
+
+                    <android.widget.CheckBox
+                        android:id="@+id/suma"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Suma"
+                        app:layout_constraintEnd_toStartOf="@+id/resta"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cuentaAtras" />
+
+                    <android.widget.CheckBox
+                        android:id="@+id/resta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resta"
+                        app:layout_constraintEnd_toStartOf="@id/multiplicacion"
+                        app:layout_constraintStart_toEndOf="@+id/suma"
+                        app:layout_constraintTop_toTopOf="@+id/suma" />
+
+                    <android.widget.CheckBox
+                        android:id="@+id/multiplicacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Multiplicación"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/resta"
+                        app:layout_constraintTop_toTopOf="@+id/suma" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/enviar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"

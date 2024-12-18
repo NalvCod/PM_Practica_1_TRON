@@ -27,7 +27,7 @@
 
         </ImageView>
 
-        <EditText
+        <TextView
             android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,19 @@
             app:layout_constraintStart_toEndOf="@id/iconoSup"
             app:layout_constraintTop_toTopOf="parent">
 
-        </EditText>
+        </TextView>
+
+        <ImageView
+            android:id="@+id/iconoOpciones"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/config"
+            app:layout_constraintBottom_toBottomOf="@+id/titulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/titulo">
+
+        </ImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
+                android:textStyle="bold"
                 android:textSize="50dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -71,9 +84,11 @@
                 android:id="@+id/aciertos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
                 android:layout_marginTop="10dp"
+                android:textStyle="bold"
                 android:text="Aciertos: "
-                app:layout_constraintEnd_toStartOf="@+id/fallos"
+                app:layout_constraintEnd_toStartOf="@+id/contador"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/contador" />
 
@@ -82,7 +97,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
+                android:textColor="@color/verdecito"
                 android:textSize="30dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/aciertos"
                 app:layout_constraintStart_toStartOf="@+id/aciertos"
                 app:layout_constraintTop_toBottomOf="@+id/aciertos" />
@@ -91,9 +108,11 @@
                 android:id="@+id/fallos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 android:text="Fallos: "
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/aciertos"
+                app:layout_constraintStart_toEndOf="@+id/contador"
                 app:layout_constraintTop_toTopOf="@+id/aciertos" />
 
             <TextView
@@ -102,6 +121,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
                 android:text="0"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_error"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="@+id/fallos"
                 app:layout_constraintStart_toStartOf="@+id/fallos"
@@ -114,6 +135,7 @@
                 android:layout_marginVertical="10dp"
                 android:layout_marginTop="27dp"
                 android:layout_marginStart="20dp"
+                android:textSize="20dp"
                 android:text=""
                 app:layout_constraintEnd_toStartOf="@+id/fallos"
                 app:layout_constraintStart_toEndOf="@+id/aciertosNum"
@@ -134,8 +156,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:textSize="30dp"
                 android:text="aaaa"
+
+                android:textSize="30dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/cuentaAnterior"
                 app:layout_constraintStart_toStartOf="@+id/cuentaAnterior"
                 app:layout_constraintTop_toBottomOf="@+id/cuentaAnterior" />
@@ -147,6 +171,8 @@
                 android:layout_marginVertical="10dp"
                 android:text="aaa"
                 android:textColor="@color/grisesito"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/cuentaActual"
                 app:layout_constraintStart_toStartOf="@+id/cuentaActual"
                 app:layout_constraintTop_toBottomOf="@+id/cuentaActual" />
@@ -227,7 +253,7 @@
             android:textColor="@color/white"
             android:textSize="25dp"
             app:layout_constraintBottom_toTopOf="@id/borrarUltimo"
-            app:layout_constraintEnd_toStartOf="@id/enviar"
+            app:layout_constraintEnd_toStartOf="@id/menos"
             app:layout_constraintStart_toEndOf="@id/b2"
             app:layout_constraintTop_toBottomOf="@id/b6"
             android:background="@color/design_default_color_secondary_variant"/>
@@ -266,7 +292,7 @@
             android:textColor="@color/white"
             android:textSize="25dp"
             app:layout_constraintBottom_toTopOf="@id/b3"
-            app:layout_constraintEnd_toStartOf="@id/enviar"
+            app:layout_constraintEnd_toStartOf="@id/menos"
             app:layout_constraintStart_toEndOf="@id/b5"
             app:layout_constraintTop_toBottomOf="@id/b9"
             android:background="@color/design_default_color_secondary_variant"/>
@@ -337,6 +363,20 @@
             app:layout_constraintTop_toTopOf="@+id/b9" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/menos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toTopOf="@id/enviar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/b6"
+            app:layout_constraintTop_toBottomOf="@id/borrarTodo"
+            android:background="@color/design_default_color_secondary_variant">
+
+        </androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/enviar"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -346,7 +386,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/b6"
-            app:layout_constraintTop_toBottomOf="@id/borrarTodo"
+            app:layout_constraintTop_toBottomOf="@id/menos"
             android:background="@color/azulito2">
 
         </androidx.appcompat.widget.AppCompatButton>
