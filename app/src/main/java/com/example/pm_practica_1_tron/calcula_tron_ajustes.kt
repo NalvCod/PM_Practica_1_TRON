@@ -1,7 +1,9 @@
 package com.example.pm_practica_1_tron
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -37,7 +39,10 @@ class calcula_tron_ajustes : AppCompatActivity() {
             editor.putBoolean("resta", bind.resta.isChecked)
             editor.putBoolean("multiplicacion", bind.multiplicacion.isChecked)
 
+            Toast.makeText(this, "Se han guardado los datos", Toast.LENGTH_SHORT).show()
             editor.apply() //Aplica los cambios
+            val intent = Intent(this, CalculaTron::class.java)
+            startActivity(intent)
         }
     }
 }

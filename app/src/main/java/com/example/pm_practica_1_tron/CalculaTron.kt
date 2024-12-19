@@ -38,6 +38,7 @@ class CalculaTron : AppCompatActivity() {
     private var num1Siguiente : Int = 0
     private var num2Siguiente : Int = 0
     private var operador : String = ""
+    private var operadorsiguiente : String = ""
     private var operadores = listOf("+", "-", "*")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +48,7 @@ class CalculaTron : AppCompatActivity() {
         setContentView(bind.root)
 
         var segundos = bind.contador.text.toString().toLong() // Definir segundos fuera del CountDownTimer
-        object : CountDownTimer(segundos * 1000, 1000) { // Convertir a milisegundos
+        object : CountDownTimer(segundos * 10000, 1000) { // Convertir a milisegundos
             override fun onTick(millisUntilFinished: Long) {
                 bind.contador.text = (millisUntilFinished / 1000).toString() // Actualizar el contador
             }
@@ -66,13 +67,12 @@ class CalculaTron : AppCompatActivity() {
         segundos = shared.getInt("cuentaatras", 20.toInt()).toLong()
         suma = shared.getBoolean("suma", true)
         resta = shared.getBoolean("resta", true)
-        multiplicacion = shared.getBoolean("multiplicacion", false)
+        multiplicacion = shared.getBoolean("multiplicacion", true)
         animacion = shared.getBoolean("animacion", false)
 
         cuentaSiguiente = generarCuenta()
-        bind.cuentaSiguiente.text = cuentaSiguiente
-        cuentaActual = generarCuenta()
-        bind.cuentaActual.text = cuentaActual
+        pasarTurno()
+        cuentaSiguiente = generarCuenta()
 
         for (i in 0..9) {
             val button = when (i) {
@@ -126,17 +126,20 @@ class CalculaTron : AppCompatActivity() {
     }
 
     fun generarCuenta(): String {
-        operador = operadores.random()
-        num1 = (min..max).random()
+        operadorsiguiente = operadores.random()
+        num1Siguiente = (min..max).random()
 
-        if (operador == "-") {
-            num2Siguiente = (min..num1).random() // Asegura que num2 <= num1
+        if (operadorsiguiente == "-") {
+            num2Siguiente = (min..num1Siguiente).random() // Asegura que num2 <= num1
         } else {
-            num2 = (min..max).random()
+            num2Siguiente = (min..max).random()
         }
 
-        val cuenta = "$num1$operador$num2"
-        return cuenta
+        return "$num1Siguiente$operadorsiguiente$num2Siguiente"
+    }
+
+    fun cuentaString(){
+
     }
 
     fun resultadoCuenta(): Int {
@@ -164,6 +167,10 @@ class CalculaTron : AppCompatActivity() {
 
         cuentaActual = bind.cuentaSiguiente.text.toString()
         bind.cuentaActual.text = cuentaSiguiente
+
+        num1 = num1Siguiente
+        operador = operadorsiguiente
+        num2 = num2Siguiente
 
         bind.cuentaSiguiente.text = generarCuenta()
         cuentaSiguiente = bind.cuentaSiguiente.text.toString()
