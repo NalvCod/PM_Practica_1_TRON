@@ -4,13 +4,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.pm_practica_1_tron.R
 import com.example.pm_practica_1_tron.databinding.ActivityCalculaTronBinding
 
 
@@ -44,11 +39,22 @@ class CalculaTron : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityCalculaTronBinding.inflate(layoutInflater)
-        fin = Intent(this, MenuPrincipal::class.java)
+        fin = Intent(this, CalculaTronResultados::class.java)
         setContentView(bind.root)
 
         var segundos = bind.contador.text.toString().toLong() // Definir segundos fuera del CountDownTimer
-        object : CountDownTimer(segundos * 10000, 1000) { // Convertir a milisegundos
+
+        shared = getSharedPreferences("ajustes", MODE_PRIVATE)
+
+        max = shared.getInt("maximo", 10)
+        min = shared.getInt("minimo", 0)
+        segundos = shared.getInt("cuentaatras", 20).toLong()
+        suma = shared.getBoolean("suma", true)
+        resta = shared.getBoolean("resta", true)
+        multiplicacion = shared.getBoolean("multiplicacion", true)
+        animacion = shared.getBoolean("animacion", false)
+
+        object : CountDownTimer(segundos * 1000, 1000) { // Convertir a milisegundos
             override fun onTick(millisUntilFinished: Long) {
                 bind.contador.text = (millisUntilFinished / 1000).toString() // Actualizar el contador
             }
@@ -59,23 +65,12 @@ class CalculaTron : AppCompatActivity() {
                 startActivity(fin)
             }
         }.start()
-
-        shared = getSharedPreferences("ajustes", MODE_PRIVATE)
-
-        max = shared.getInt("maximo", 10)
-        min = shared.getInt("minimo", 0)
-        segundos = shared.getInt("cuentaatras", 20.toInt()).toLong()
-        suma = shared.getBoolean("suma", true)
-        resta = shared.getBoolean("resta", true)
-        multiplicacion = shared.getBoolean("multiplicacion", true)
-        animacion = shared.getBoolean("animacion", false)
-
         cuentaSiguiente = generarCuenta()
         pasarTurno()
         cuentaSiguiente = generarCuenta()
 
         for (i in 0..9) {
-            val button = when (i) {
+            val botones = when (i) {
                 0 -> bind.b0
                 1 -> bind.b1
                 2 -> bind.b2
@@ -88,7 +83,7 @@ class CalculaTron : AppCompatActivity() {
                 9 -> bind.b9
                 else -> null
             }
-            button?.setOnClickListener {
+            botones?.setOnClickListener {
                 bind.input.append(i.toString())
             }
         }
@@ -136,10 +131,6 @@ class CalculaTron : AppCompatActivity() {
         }
 
         return "$num1Siguiente$operadorsiguiente$num2Siguiente"
-    }
-
-    fun cuentaString(){
-
     }
 
     fun resultadoCuenta(): Int {

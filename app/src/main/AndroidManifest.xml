@@ -13,14 +13,16 @@
         android:theme="@style/Theme.PM_Practica_1_Tron"
         tools:targetApi="31">
         <activity
+            android:name=".CalculaTronResultados"
+            android:exported="false" />
+        <activity
             android:name=".CalculaTron"
-
             android:exported="false"
             tools:ignore="DiscouragedApi" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".calcula_tron_ajustes"
             android:exported="false" />

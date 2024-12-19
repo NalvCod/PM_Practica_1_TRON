@@ -62,10 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         vidas = findViewById(R.id.vidas)
         iniciar = findViewById(R.id.iniciar)
-
-
-
-
         randomizarCartas()
 
         iniciar.setOnClickListener {

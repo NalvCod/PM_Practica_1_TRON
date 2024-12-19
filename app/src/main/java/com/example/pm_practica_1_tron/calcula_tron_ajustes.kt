@@ -27,8 +27,12 @@ class calcula_tron_ajustes : AppCompatActivity() {
             insets
         }
 
-        shared = getSharedPreferences("ajustes", MODE_PRIVATE)
+        bind.iconoSup.setOnClickListener{
+            val intent = Intent(this, MenuPrincipal::class.java)
+            startActivity(intent)
+        }
 
+        shared = getSharedPreferences("ajustes", MODE_PRIVATE)
         bind.enviar.setOnClickListener {
             val editor = shared.edit()
 
